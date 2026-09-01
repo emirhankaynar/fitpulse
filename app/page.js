@@ -69,11 +69,11 @@ export default function Home() {
   // Haftalık Plan
   const [planDay, setPlanDay] = useState('Pazartesi');
 
-  // PWA Prompt
+  // PWA & Story Modalleri
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [showShareModal, setShowShareModal] = useState(false);
 
-  // Yerel Hafızadan Pro Durumunu Kontrol Etme
+  // Yerel Hafızadan Pro Durumunu Yükle
   useEffect(() => {
     const savedPro = localStorage.getItem('fitpulse_pro_user');
     if (savedPro === 'true') setIsPro(true);
@@ -83,7 +83,7 @@ export default function Home() {
     if (licenseKey.trim().toUpperCase() === 'FITPRO2026' || licenseKey.trim().length >= 8) {
       setIsPro(true);
       localStorage.setItem('fitpulse_pro_user', 'true');
-      setLicenseMsg('✅ Pro VIP Üyeliğiniz Başarıyla Aktif Edildi!');
+      setLicenseMsg('✅ Pro VIP Aboneliğiniz Başarıyla Aktif Edildi!');
       setTimeout(() => setShowProModal(false), 1500);
     } else {
       setLicenseMsg('❌ Geçersiz lisans anahtarı. Lütfen kontrol edin.');
@@ -303,7 +303,7 @@ export default function Home() {
   return (
     <main className="relative min-h-screen bg-[#070b14] text-slate-100 p-4 md:p-10 flex flex-col items-center justify-start overflow-hidden">
       
-      {/* Glow Efektleri */}
+      {/* Arka Plan Işıkları */}
       <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none"></div>
       <div className="absolute top-1/3 -right-32 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none"></div>
 
@@ -937,7 +937,7 @@ export default function Home() {
           </div>
         )}
 
-        {/* PRO ÜYELİK PAYWALL / AYLIK & YILLIK ABONELİK MODALI */}
+        {/* PRO ÜYELİK PAYWALL / AYLIK GUMROAD MEMBERSHIP MODALI */}
         {showProModal && (
           <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
             <div className="bg-slate-900 border border-emerald-500/40 rounded-3xl p-6 md:p-8 max-w-lg w-full space-y-5 shadow-2xl relative text-left">
@@ -974,49 +974,26 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* AYLIK & YILLIK OTOMATİK ABONELİK KARTLARI */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {/* Sol: Aylık Otomatik Abonelik */}
-                <a
-                  href="https://kaynar82.gumroad.com/l/fitpulse-app"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="p-4 bg-slate-950 hover:border-emerald-500 border border-slate-800 rounded-2xl text-left transition block group relative"
-                >
-                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">
-                    Aylık VIP Abonelik
+              {/* GUMROAD MEMBERSHIP SATIN ALMA KARTI */}
+              <a
+                href="https://kaynar82.gumroad.com/l/fitpulse-membership"
+                target="_blank"
+                rel="noreferrer"
+                className="p-4 bg-gradient-to-r from-emerald-950/90 via-slate-900 to-slate-950 hover:border-emerald-400 border-2 border-emerald-500/60 rounded-2xl flex items-center justify-between transition group shadow-xl"
+              >
+                <div>
+                  <span className="inline-block text-[10px] text-amber-400 font-extrabold uppercase tracking-wider bg-amber-950/60 px-2 py-0.5 rounded border border-amber-500/30 mb-1">
+                    OTOMATİK VIP ABONELİK
                   </span>
-                  <div className="text-xl font-black text-white mt-1">
+                  <div className="text-2xl font-black text-white">
                     $2.99 <span className="text-xs text-slate-400 font-normal">/ ay</span>
                   </div>
-                  <span className="text-[10px] text-slate-500 block mt-1">Her ay otomatik yenilenir • İstediğinde iptal et</span>
-                  <div className="mt-3 w-full py-2 bg-slate-900 group-hover:bg-slate-800 text-slate-300 text-xs font-bold text-center rounded-xl border border-slate-700 transition">
-                    Aylık Abone Ol →
-                  </div>
-                </a>
-
-                {/* Sağ: Yıllık Otomatik Abonelik */}
-                <a
-                  href="https://kaynar82.gumroad.com/l/fitpulse-app"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="p-4 bg-gradient-to-br from-emerald-950/80 via-slate-950 to-slate-950 border-2 border-emerald-500/60 rounded-2xl text-left transition block group relative shadow-lg"
-                >
-                  <span className="absolute -top-2.5 right-3 bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-950 text-[9px] font-black px-2 py-0.5 rounded-full shadow-md">
-                    %30 TASARRUF
-                  </span>
-                  <span className="text-[10px] text-amber-400 font-extrabold uppercase tracking-wider block">
-                    Yıllık VIP Abonelik
-                  </span>
-                  <div className="text-xl font-black text-white mt-1">
-                    $24.99 <span className="text-xs text-slate-400 font-normal">/ yıl</span>
-                  </div>
-                  <span className="text-[10px] text-emerald-400/90 block mt-1">Ayda sadece ~$2.08'a gelir</span>
-                  <div className="mt-3 w-full py-2 bg-emerald-500 group-hover:bg-emerald-400 text-slate-950 text-xs font-black text-center rounded-xl transition shadow-md shadow-emerald-500/20">
-                    Yıllık Avantajı Al →
-                  </div>
-                </a>
-              </div>
+                  <span className="text-[11px] text-slate-400 block mt-0.5">Her ay otomatik yenilenir • İstediğinde tek tıkla iptal et</span>
+                </div>
+                <div className="px-5 py-3 bg-emerald-500 group-hover:bg-emerald-400 text-slate-950 text-xs font-black rounded-xl transition shadow-lg shadow-emerald-500/20 shrink-0">
+                  Abone Ol & Aç →
+                </div>
+              </a>
 
               {/* Lisans Anahtarı ile Aktifleştirme */}
               <div className="border-t border-slate-800 pt-4 space-y-2">
@@ -1094,14 +1071,14 @@ export default function Home() {
             </div>
             <h3 className="text-sm font-bold text-white">FitPulse Pro: Otomatik İlerleme & Takip Sistemi</h3>
             <p className="text-xs text-slate-400 mt-0.5">
-              Aylık veya yıllık abonelikle tüm kilitleri açın, antrenman ve makrolarınızı otomatik takip edin.
+              Aylık abonelikle tüm kilitleri açın, antrenman ve makrolarınızı otomatik takip edin.
             </p>
           </div>
           <button
             onClick={() => setShowProModal(true)}
             className="shrink-0 w-full sm:w-auto text-center bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-black px-6 py-3.5 rounded-xl transition shadow-lg shadow-emerald-500/25 active:scale-95"
           >
-            Abonelik Planlarını İncele
+            Abonelik Planını İncele
           </button>
         </div>
 
