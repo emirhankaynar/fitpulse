@@ -69,11 +69,11 @@ export default function Home() {
   // Haftalık Plan
   const [planDay, setPlanDay] = useState('Pazartesi');
 
-  // PWA & Story Modalleri
+  // PWA Prompt
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [showShareModal, setShowShareModal] = useState(false);
 
-  // Yerel Hafızadan Pro Durumunu Yükle
+  // Yerel Hafızadan Pro Durumunu Kontrol Etme
   useEffect(() => {
     const savedPro = localStorage.getItem('fitpulse_pro_user');
     if (savedPro === 'true') setIsPro(true);
@@ -83,7 +83,7 @@ export default function Home() {
     if (licenseKey.trim().toUpperCase() === 'FITPRO2026' || licenseKey.trim().length >= 8) {
       setIsPro(true);
       localStorage.setItem('fitpulse_pro_user', 'true');
-      setLicenseMsg('✅ Pro VIP Aboneliğiniz Başarıyla Aktif Edildi!');
+      setLicenseMsg('✅ Pro VIP Üyeliğiniz Başarıyla Aktif Edildi!');
       setTimeout(() => setShowProModal(false), 1500);
     } else {
       setLicenseMsg('❌ Geçersiz lisans anahtarı. Lütfen kontrol edin.');
@@ -303,7 +303,7 @@ export default function Home() {
   return (
     <main className="relative min-h-screen bg-[#070b14] text-slate-100 p-4 md:p-10 flex flex-col items-center justify-start overflow-hidden">
       
-      {/* Arka Plan Işıkları */}
+      {/* Glow Efektleri */}
       <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none"></div>
       <div className="absolute top-1/3 -right-32 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none"></div>
 
@@ -995,7 +995,7 @@ export default function Home() {
                   </div>
                 </a>
 
-                {/* Sağ: Yıllık Otomatik Abonelik (Öne Çıkan) */}
+                {/* Sağ: Yıllık Otomatik Abonelik */}
                 <a
                   href="https://kaynar82.gumroad.com/l/fitpulse-app"
                   target="_blank"
